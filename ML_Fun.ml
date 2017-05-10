@@ -20,7 +20,7 @@ fun flip nil        = nil
   | flip(h::t::nil) = [t]@[h]
   | flip(h::s::t)   = [s,h] @ flip(t);
 
-(* high value in list Feb 9th*)
+(* high value in list*)
 fun high(a::nil)    = a
   | high(a::b::c)   = if a>b
   					  then high(a::c)
@@ -29,11 +29,11 @@ fun high(a::nil)    = a
 fun zip (nil,nil) = nil
   | zip (a,b)     = (hd a,hd b)::zip(tl a, tl b);
 
-(* (((((((((((()))))))))))) DOESN'T WORK YET!!!!!(((((((((((()))))))))))) *)
-(* delete kth value in list Feb 9th*)
+
+(* delete kth value in list *)
 fun del(L,0)  = hd L :: tl(tl L)
   | del(L,n)  = del(  (hd(L)::tl(L) ), n-1);
-(* prefix Feb 9th*)
+(* prefix *)
 fun prefix(nil,b) = true
   | prefix(a,nil) = false
   | prefix(a,b)   = if (hd a = hd b)
@@ -43,15 +43,15 @@ fun prefix(nil,b) = true
 fun suffix([],b) = true
   | suffix(a,[]) = false
   | suffix(a,b)  = (a=b) orelse suffix(a,tl b);
-(* merge Feb 16th*)
+(* merge *)
 fun merge(nil,b) = b
   | merge(a,nil) = a
   | merge(a,b)   = if(hd a < hd b)
                       then (hd a)::merge(b, tl a)
                       else (hd b)::merge(tl b, a);
-(* turn all integers to reals Feb 16th*)
+(* turn all integers to reals *)
 val realize = map (fn (x) => real(x));
-(* High value in list v2 Feb 16th*)
+(* High value in list v2 *)
 fun max a = foldr (fn(a,b) => if a > b then a else b) (hd a) a;
 (* We wrote a merge sortish thing in class it is really an insertion sort*)
 fun mlergesort L = 
@@ -59,45 +59,40 @@ fun mlergesort L =
     in foldl merge nil singletons
     end;
 
-(* ------------------------------------- *)
-(* Turn this set in on the 23rd together *)
-(* ------------------------------------- *)
-          (* xor bool list Feb 23rd *)
+(* xor bool list *)
 fun xor L = foldr(fn(a,b) => 
             if (a = true andalso b = false) orelse (b = true andalso a = false) 
             then true 
             else false ) false L; 
-          (* formerly negative intergers Feb 23rd *)
+(* formerly negative intergers *)
 val wasNegative =
     let val onlyNeg = List.filter (fn n => n > 0)
     in  onlyNeg o map (fn x => ~1 *(x))
     end;
-          (* Sum alternating values  Feb 23rd *)
+          (* Sum alternating values*)
           (* doesn't work *)
-(* fun sum L = 
-    let val foldr((a,b)) => 
-    in 
-    end;
-          (* Unzip Feb 23rd *)
-          (* doesn't work *)
-fun unzip 
-    let val lista = [];
-        val listb = [];
-        fun lists((a,b)) = (a::lista, b::listb)
-    in map lists(hd L) 
-    end; *)
+		(* fun sum L = 
+		    let val foldr((a,b)) => 
+		    in 
+		    end;
+	 (* Unzip *)
+	 (* doesn't work *)
+		fun unzip 
+		    let val lista = [];
+			val listb = [];
+			fun lists((a,b)) = (a::lista, b::listb)
+		    in map lists(hd L) 
+		    end; *)
 
-(* ------------------------------------ *)
-(* Turn this set in on the 2nd together *)
-(* ------------------------------------ *)
 
-(* first match from list Mar 2nd*)
+
+(* first match from list*)
 fun first comp nil = NONE
   | first comp (x::xs) = 
   if comp(x)
         then SOME x
         else first comp xs;
-(* last match from list Mar 2nd*)
+(* last match from list*)
 fun last comp L =
   foldr(fn (x,y) => 
     if isSome(y)
@@ -107,7 +102,7 @@ fun last comp L =
        else NONE
     ) NONE L;
 
-(* int to string Mar 2nd*)
+(* int to string*)
 fun intstr x = 
   let val toChar = (x mod 10) + 48
   in if x < 0 
@@ -117,7 +112,7 @@ fun intstr x =
      else str(chr(toChar))
   end;
 
-(* listify Mar 2nd *)
+(* listify *)
 fun listify nil = nil
   |   listify [x] = [[x]]
   |   listify (x::y::z) =
